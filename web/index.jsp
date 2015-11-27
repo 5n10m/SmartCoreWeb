@@ -3,6 +3,8 @@
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
+
+http://fiberparty.upc.es:8080/PTIRestBackend/webresources/login
 -->
 <html>
     <head>
@@ -14,7 +16,7 @@ and open the template in the editor.
         <h1>SmartCore</h1>
         <br>
         <h2>Introdueixi les seves credencials</h2>
-        <form action="http://fiberparty.upc.es:8080/PTIRestBackend/webresources/login" method="post">
+        <form action="login" method="post">
             <table>
                 <tr>
                     <th>User:</th> <td><input name="user" size="16" maxlength="16"></td>
