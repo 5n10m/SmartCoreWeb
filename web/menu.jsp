@@ -43,7 +43,7 @@
                             <option selected VALUE=1> On</option>
                             <option selected VALUE=2> Auto</option>
                 </td>  
-                <input name="menjador" type="submit" value="Enviar">
+                <td><input name="menjador" type="submit" value="Enviar"></td>
             </form>
         </tr>
         <tr>
