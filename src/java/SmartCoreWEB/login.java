@@ -51,12 +51,12 @@ public class login extends HttpServlet {
             
             if("1".equals(rs.getString("total"))) {      //Si les credencials introduides coincideixen
                 out.println("<p><h3><font color=#347C2C> Hola! El teu login ha sigut un exit. </font></h3><p>");
-                RequestDispatcher rd = request.getRequestDispatcher("menu.html");
+                RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
                 rd.include(request, response);
             }
             else {
                 out.println("<p><h3><font color=#F70D1A> Usuari i/o password introduit/s incorrecte/s. Torni a intentar-ho. </font></h3><p><br>");
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("index.html");
                 rd.include(request, response);
             }
             connection.close();
