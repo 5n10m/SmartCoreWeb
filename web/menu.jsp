@@ -13,7 +13,7 @@
                     Connection connection = null;
                      connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
                      Statement statement = connection.createStatement();
-%>>
+%>
 
 
 
@@ -27,7 +27,8 @@
         <table>
         <tr>
             <form action="login" method="post">
-                <th>Bombeta menjador:</th> <td><%
+                <th>Bombeta menjador:</th> 
+                <td><%
                      ResultSet rs = statement.executeQuery("select state from devices where userid = 1 and id = 3;");
                      int state = -3;
                     while(rs.next()){
@@ -37,11 +38,11 @@
                     else if (state == 1) out.print("ON");
                     else if (state == 2) out.print("Auto");
              %></td>
-                <select name=companyia>
+                <td><select name=newstate>
                             <option selected VALUE=0> Off</option>
                             <option selected VALUE=1> On</option>
                             <option selected VALUE=2> Auto</option>
-                    
+                </td>  
                 <input name="menjador" type="submit" value="Enviar">
             </form>
         </tr>
@@ -57,7 +58,7 @@
                     else if (state == 1) out.print("ON");
                     else if (state == 2) out.print("Auto");
              %></td>
-                <td><select name=companyia>
+                <td><select name=newstate>
                             <option selected VALUE=0> Off</option>
                             <option selected VALUE=1> On</option>
                             <option selected VALUE=2> Auto</option>
@@ -76,7 +77,7 @@
                     if (state == 0) out.print("OFF");
                     else if (state == 1) out.print("ON");
              %></td>
-                <td><select name=companyia>
+                <td><select name=newstate>
                             <option selected VALUE=0> Off</option>
                             <option selected VALUE=1> On</option>
                 </td>
