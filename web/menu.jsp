@@ -26,7 +26,7 @@
     <body>
         <table>
         <tr>
-            <form action="login" method="post">
+            <form action="menu" method="post">
                 <th>Bombeta menjador:</th> 
                 <td><%
                      ResultSet rs = statement.executeQuery("select state from devices where userid = 1 and id = 3;");
@@ -43,11 +43,11 @@
                             <option selected VALUE=1> On</option>
                             <option selected VALUE=2> Auto</option>
                 </td>  
-                <td><input name="menjador" type="submit" value="Canviar estat"></td>
+                <td><input name="3" type="submit" value="Canviar estat"></td>
             </form>
         </tr>
         <tr>
-            <form action="login" method="post">
+            <form action="menu" method="post">
                 <th>Bombeta terrassa:</th> <td><%
                      rs = statement.executeQuery("select state from devices where userid = 1 and id = 4;");
                      state = -3;
@@ -63,11 +63,11 @@
                             <option selected VALUE=1> On</option>
                             <option selected VALUE=2> Auto</option>
                 </td>
-                <td><input name="terrassa" type="submit" value="Canviar estat"></td>
+                <td><input name="4" type="submit" value="Canviar estat"></td>
             </form>
         </tr>
         <tr>
-            <form action="login" method="post">
+            <form action="menu" method="post">
                 <th>Alarma:</th> <td><%
                      rs = statement.executeQuery("select state from devices where userid = 1 and id = 5;");
                      state = -3;
@@ -85,7 +85,7 @@
             </form>
         </tr>
         <tr>
-            <form action="login" method="post">
+            <form action="menu" method="post">
                 <th>Temperatura:</th> <td><%
                      rs = statement.executeQuery("select state from devices where userid = 1 and id = 2;");
                      state = -3;

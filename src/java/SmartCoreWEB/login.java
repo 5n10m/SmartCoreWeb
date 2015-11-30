@@ -47,7 +47,7 @@ public class login extends HttpServlet {
         try{
             connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select count (*) as total from users where user = \""+ request.getParameter("user") +"\" and  password = \""+ request.getParameter("password") +"\"");
+            ResultSet rs = statement.executeQuery("select count (*) as total from users where username = \""+ request.getParameter("user") +"\" and  password = \""+ request.getParameter("password") +"\"");
             
             if("1".equals(rs.getString("total"))) {      //Si les credencials introduides coincideixen
                 out.println("<p><h3><font color=#347C2C> Hola! El teu login ha sigut un exit. </font></h3><p>");
