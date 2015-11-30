@@ -6,11 +6,36 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Administració de dispositius</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
-    </body>
+        <table>
+        <tr>
+            <form action="login" method="post">
+                <th>Bombeta menjador:</th> <td><input name="user" size="16" maxlength="16"></td>
+                <td><select name=companyia>
+                            <option selected VALUE=0> Off</option>
+                            <option selected VALUE=1> On</option>
+                            <option selected VALUE=2> Auto</option>
+                </td>
+                <td><input name="Login" type="submit" value="Canviar estat"></td>
+            </form>
+        </tr>
+        <tr>
+        <form action="login" method="post">
+                <th>Bombeta menjador:</th> <td><input name="user" size="16" maxlength="16"></td>
+                <td><select name=companyia>
+                            <option selected VALUE=0> Off</option>
+                            <option selected VALUE=1> On</option>
+                            <option selected VALUE=2> Auto</option>
+                </td>
+                <td><input name="Login" type="submit" value="Canviar estat"></td>
+            </form>
+    </tr>
+</table>
+<br>
+
+</body>
 </html>

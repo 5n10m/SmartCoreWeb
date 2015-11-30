@@ -6,14 +6,10 @@ package SmartCoreWEB;
 * and open the template in the editor.
 */
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,11 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Form;
 
 /**
  *
@@ -50,7 +41,41 @@ public class login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         /* TODO output your page here. You may use following sample code. */
+        out.println("<p>test</p>");
         Class.forName("org.sqlite.JDBC");
+        Connection connection = null;
+        try{
+            connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select count (*) as total from users where user = \""+ request.getParameter("user") +"\" and  password = \""+ request.getParameter("password") +"\"");
+            
+            if("1".equals(rs.getString("total"))) {      //Si les credencials introduides coincideixen
+                out.println("<p><h3><font color=#347C2C> Hola! El teu login ha sigut un exit. </font></h3><p>");
+                RequestDispatcher rd = request.getRequestDispatcher("menu.html");
+                rd.include(request, response);
+            }
+            else {
+                out.println("<p><h3><font color=#F70D1A> Usuari i/o password introduit/s incorrecte/s. Torni a intentar-ho. </font></h3><p><br>");
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.include(request, response);
+            }
+            connection.close();
+        }
+        catch(SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if(connection != null)
+                    connection.close();
+            }
+            catch(SQLException e) {
+                //Error en tancar la connexio
+                System.err.println(e.getMessage());
+            }
+        }
+        
+        /*Class.forName("org.sqlite.JDBC");
         out.println("<h1>TEST</h1>");
         
         WebTarget webTarget;
@@ -64,7 +89,7 @@ public class login extends HttpServlet {
         form.param("password", "bar");
         webTarget.request().post(Entity.entity(form, URLEncoder.encode("", "UTF-8")), String.class);
         
-        out.println(webTarget);
+        out.println(webTarget);*/
         /*if("1".equals(Integer.parseInt(responseSB.toString()))) {      //Si les credencials introduides coincideixen
             out.println("<p><h3><font color=#347C2C> Hola! El teu login ha sigut un exit. </font></h3><p>");
             RequestDispatcher rd = request.getRequestDispatcher("menu.html");
