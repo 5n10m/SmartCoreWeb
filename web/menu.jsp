@@ -101,5 +101,9 @@
         </tr>
 </table>
 <br>
+<br>
+<form action="logout" method="post">
+<input name="logout" type="submit" value="Desconecta't">
+</form>
 </body>
 </html>
