@@ -1,17 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package SmartCoreWEB;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "menu", urlPatterns = {"/menu"})
 public class menu extends HttpServlet {
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,19 +40,46 @@ public class menu extends HttpServlet {
             /*out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet menu</title>");            
+            out.println("<title>Servlet menu</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet menu at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");*/
-            
-            
-            request.getParameter("user");
+            HttpSession session = request.getSession(false);
+            String device = null;
+            try {
+                // If you are not in a session - you are not logged in
+                if (session == null) {
+                    out.println("<p>No s'ha trobat cap sessió</p>");
+                    RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                    rd.include(request, response);
+                } else {
+                    if(request.getParameter("1") != null) device = "1";
+                    else if(request.getParameter("2") != null) device = "2";
+                    else if(request.getParameter("3") != null) device = "3";
+                    else if(request.getParameter("4") != null) device = "4";
+                    /*out.println("Thank you, you are already logged in");
+                    out.println("Here is the data in your session");
+                    Enumeration names = session.getAttributeNames();
+                    while (names.hasMoreElements()) {
+                        String name = (String) names.nextElement();
+                        Object value = session.getAttribute(name);
+                        out.println("<p>name=" + name + " value=" + value + "</p>");
+                    }*/
+                    RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+                    rd.include(request, response);
+                }
+                // Write html for a new login
+                
+                out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -64,7 +94,7 @@ public class menu extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -78,7 +108,7 @@ public class menu extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -88,5 +118,5 @@ public class menu extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }

@@ -10,6 +10,7 @@ package SmartCoreWEB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,33 +43,61 @@ public class login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         /* TODO output your page here. You may use following sample code. */
-        out.println("<p>test</p>");
-        Class.forName("org.sqlite.JDBC");
-        Connection connection = null;
-        try{
-            connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select count (*) as total from users where username = \""+ request.getParameter("user") +"\" and  password = \""+ request.getParameter("password") +"\"");
-            
-            if("1".equals(rs.getString("total"))) {      //Si les credencials introduides coincideixen
-                out.println("<p><h3><font color=#347C2C> Hola! El teu login ha sigut un exit. </font></h3><p>");
+        //out.println("<p>test</p>");
+        String token = null;
+        
+        
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
+            //conn = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
+            stmt = conn.createStatement();
+            int contador = 0;
+            //out.println("<p>aqui?</p>");
+            rs = stmt.executeQuery("Select count (*) as contador from users where username =\""+request.getParameter("user")+"\" and password = \""+request.getParameter("password")+"\";");
+            while(rs.next()){
+                //Retrieve by column name
+                contador = rs.getInt("contador");
+                //out.println("<p>"+Integer.toString(contador)+"</p>");
+            }
+            token = Integer.toString(contador);
+            if (contador > 0) {
+                out.println("<p>ACCES PERMES</p>");
+                HttpSession session = request.getSession(true);
+                // Set some attribute values to the session
+                // In this case user and password from the request and client
+                session.setAttribute("username", request.getParameter("user"));
+                session.setAttribute("password", request.getParameter("password"));
                 RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
                 rd.include(request, response);
+                
+                /*Enumeration names = session.getAttributeNames();
+                while (names.hasMoreElements()) {
+                    String name = (String) names.nextElement();
+                    Object value = session.getAttribute(name);
+                    out.println("<p>name=" + name + " value=" + value + "</p>");
+                }*/
+                
             }
-            else {
-                out.println("<p><h3><font color=#F70D1A> Usuari i/o password introduit/s incorrecte/s. Torni a intentar-ho. </font></h3><p><br>");
+            else{
+                out.println("<p> usuari o password incorrectes </p>");
                 RequestDispatcher rd = request.getRequestDispatcher("index.html");
                 rd.include(request, response);
             }
-            connection.close();
-        }
-        catch(SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        finally {
+            //token  = Integer.toString(rs.getInt("contador"));
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
             try {
-                if(connection != null)
-                    connection.close();
+                if(conn != null)
+                    conn.close();
             }
             catch(SQLException e) {
                 //Error en tancar la connexio
@@ -75,7 +105,8 @@ public class login extends HttpServlet {
             }
         }
         
-        /*Class.forName("org.sqlite.JDBC");
+        /*RequestDispatcher rd = request.getRequestDispatcher("index.html")
+        Class.forName("org.sqlite.JDBC");
         out.println("<h1>TEST</h1>");
         
         WebTarget webTarget;
@@ -91,14 +122,14 @@ public class login extends HttpServlet {
         
         out.println(webTarget);*/
         /*if("1".equals(Integer.parseInt(responseSB.toString()))) {      //Si les credencials introduides coincideixen
-            out.println("<p><h3><font color=#347C2C> Hola! El teu login ha sigut un exit. </font></h3><p>");
-            RequestDispatcher rd = request.getRequestDispatcher("menu.html");
-            rd.include(request, response);
+        out.println("<p><h3><font color=#347C2C> Hola! El teu login ha sigut un exit. </font></h3><p>");
+        RequestDispatcher rd = request.getRequestDispatcher("menu.html");
+        rd.include(request, response);
         }
         else {
-            out.println("<p><h3><font color=#F70D1A> Usuari i/o password introduit/s incorrecte/s. Torni a intentar-ho. </font></h3><p><br>");
-            RequestDispatcher rd = request.getRequestDispatcher("index.html");
-            rd.include(request, response);
+        out.println("<p><h3><font color=#F70D1A> Usuari i/o password introduit/s incorrecte/s. Torni a intentar-ho. </font></h3><p><br>");
+        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        rd.include(request, response);
         }
         */
         

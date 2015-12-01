@@ -4,6 +4,8 @@
     Author     : david
 --%>
 
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="javax.servlet.http.*"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,8 +13,10 @@
 <%
                     Class.forName("org.sqlite.JDBC");
                     Connection connection = null;
-                     connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
+                     //connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
+                    connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
                      Statement statement = connection.createStatement();
+                     
 %>
 
 
