@@ -13,6 +13,7 @@
 <%
                     Class.forName("org.sqlite.JDBC");
                     Connection connection = null;
+                    //connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/DEFIB/Desktop/pti.sqlite");
                      connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
                     //connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
                      Statement statement = connection.createStatement();
@@ -26,84 +27,80 @@
         <title>Administració de dispositius</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="magiccss.css">
     </head>
     <body>
-        <table>
-        <tr>
+        <div class="supermagicbox">
+            <h1>Smart Core</h1>
+            <hr>       
             <form action="menu" method="post">
-                <th>Bombeta menjador:</th> 
-                <td><%
+                <label id="text">Bombeta menjador:</label><%
                      ResultSet rs = statement.executeQuery("select state from devices where userid = 1 and id = 3;");
                      int state = -3;
                     while(rs.next()){
                         state = rs.getInt("state");
                     }
-                    if (state == 0) out.print("OFF");
-                    else if (state == 1) out.print("ON");
-                    else if (state == 2) out.print("Auto");
-             %></td>
-                <td><select name=newstate>
+                    if (state == 0) out.print("<label id=\"off\">OFF</label>");
+                    else if (state == 1) out.print("<label id=\"on\">ON</label>");
+                    else if (state == 2) out.print("<label id=\"auto\">Auto</label>");
+             %>
+                <select name=newstate>
                             <option selected VALUE=0> Off</option>
                             <option selected VALUE=1> On</option>
                             <option selected VALUE=2> Auto</option>
-                </td>  
-                <td><input name="3" type="submit" value="Canviar estat"></td>
+                  
+                <input name="3" type="submit" value="Canviar estat">
             </form>
-        </tr>
-        <tr>
+        
+      
             <form action="menu" method="post">
-                <th>Bombeta terrassa:</th> <td><%
+                <label id="text">Bombeta terrassa:</label><%
                      rs = statement.executeQuery("select state from devices where userid = 1 and id = 4;");
                      state = -3;
                     while(rs.next()){
                         state = rs.getInt("state");
                     }
-                    if (state == 0) out.print("OFF");
-                    else if (state == 1) out.print("ON");
-                    else if (state == 2) out.print("Auto");
-             %></td>
-                <td><select name=newstate>
+                    if (state == 0) out.print("<label id=\"off\">OFF</label>");
+                    else if (state == 1) out.print("<label id=\"on\">ON</label>");
+                    else if (state == 2) out.print("<label id=\"auto\">Auto</label>");
+             %>
+                <select name=newstate>
                             <option selected VALUE=0> Off</option>
                             <option selected VALUE=1> On</option>
                             <option selected VALUE=2> Auto</option>
-                </td>
-                <td><input name="4" type="submit" value="Canviar estat"></td>
+                
+                <input name="4" type="submit" value="Canviar estat">
             </form>
-        </tr>
-        <tr>
+       
             <form action="menu" method="post">
-                <th>Alarma:</th> <td><%
+                <label id="text">Alarma:</label><%
                      rs = statement.executeQuery("select state from devices where userid = 1 and id = 5;");
                      state = -3;
                     while(rs.next()){
                         state = rs.getInt("state");
                     }
-                    if (state == 0) out.print("OFF");
-                    else if (state == 1) out.print("ON");
-             %></td>
-                <td><select name=newstate>
+                    if (state == 0) out.print("<label id=\"off\">OFF</label>");
+                    else if (state == 1) out.print("<label id=\"on\">ON</label>");
+             %>
+             <select name=newstate>
                             <option selected VALUE=0> Off</option>
                             <option selected VALUE=1> On</option>
-                </td>
-                <td><input name="alarma" type="submit" value="Canviar estat"></td>
+                <input name="5" type="submit" value="Canviar estat">
             </form>
-        </tr>
-        <tr>
             <form action="menu" method="post">
-                <th>Temperatura:</th> <td><%
+                <label id="text">Temperatura:</label><%
                      rs = statement.executeQuery("select state from devices where userid = 1 and id = 2;");
                      state = -3;
                     while(rs.next()){
-                        out.print(Integer.toString(rs.getInt("state")));
+                        out.print(Integer.toString(rs.getInt("state"))+"ºC");
                     }
-             %></td>
+             %>
             </form>
-        </tr>
-</table>
-<br>
-<br>
+            <br>
+            <br>
 <form action="logout" method="post">
-<input name="logout" type="submit" value="Desconecta't">
+    <center><input name="logout" type="submit" value="Desconecta't"></center>
+</div>
 </form>
 </body>
 </html>
