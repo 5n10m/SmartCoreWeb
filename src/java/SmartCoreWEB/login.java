@@ -53,8 +53,8 @@ public class login extends HttpServlet {
         
         try {
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
-            //conn = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
+            //conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
+            conn = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
             stmt = conn.createStatement();
             int contador = 0;
             //out.println("<p>aqui?</p>");

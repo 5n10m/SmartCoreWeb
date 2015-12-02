@@ -13,8 +13,8 @@
 <%
                     Class.forName("org.sqlite.JDBC");
                     Connection connection = null;
-                     //connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
-                    connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
+                     connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
+                    //connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
                      Statement statement = connection.createStatement();
                      
 %>

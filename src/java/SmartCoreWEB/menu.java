@@ -55,10 +55,15 @@ public class menu extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("index.html");
                     rd.include(request, response);
                 } else {
+                    out.println("<p>PENIS</p>");
                     if(request.getParameter("1") != null) device = "1";
                     else if(request.getParameter("2") != null) device = "2";
                     else if(request.getParameter("3") != null) device = "3";
                     else if(request.getParameter("4") != null) device = "4";
+                    out.println("<p>PENIS2</p>");
+                    magicclient client = new magicclient();
+                    Integer fuckU = client.setdevicestate(Integer.class, "pti", "pti", device, request.getParameter("newstate"));
+                    //out.println("<p>"+Integer.toString(fuckU)+"</p>");
                     /*out.println("Thank you, you are already logged in");
                     out.println("Here is the data in your session");
                     Enumeration names = session.getAttributeNames();
