@@ -62,19 +62,26 @@ public class menu extends HttpServlet {
                     else if(request.getParameter("4") != null) device = "4";
                     else if(request.getParameter("5") != null) device = "5";
                     //out.println("<p>PENIS2</p>");
-                    magicclient client = new magicclient();
+                    magicclient client = new magicclient();       
+                    
+                    response.sendRedirect("menu.jsp");
+                    
                     client.setdevicestate(Integer.class, "pti", "pti", device, request.getParameter("newstate"));
                     //out.println("<p>"+Integer.toString(fuckU)+"</p>");
                     /*out.println("Thank you, you are already logged in");
                     out.println("Here is the data in your session");
                     Enumeration names = session.getAttributeNames();
                     while (names.hasMoreElements()) {
-                        String name = (String) names.nextElement();
-                        Object value = session.getAttribute(name);
-                        out.println("<p>name=" + name + " value=" + value + "</p>");
+                    String name = (String) names.nextElement();
+                    Object value = session.getAttribute(name);
+                    out.println("<p>name=" + name + " value=" + value + "</p>");
                     }*/
-                    RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
-                    rd.include(request, response);
+                    
+                    
+                    
+                    
+                    /*RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+                    rd.include(request, response);*/
                 }
                 // Write html for a new login
                 

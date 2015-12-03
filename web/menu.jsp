@@ -11,14 +11,19 @@
 <!DOCTYPE html>
 
 <%
-                    Class.forName("org.sqlite.JDBC");
-                    Connection connection = null;
-                    //connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/DEFIB/Desktop/pti.sqlite");
-                     connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
-                    //connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
-                     Statement statement = connection.createStatement();
-                     
-%>
+    Class.forName("org.sqlite.JDBC");
+    Connection connection = null;
+    try {
+        Thread.sleep(3000);                 //1000 milliseconds is one second.
+    } catch(InterruptedException ex) {
+        Thread.currentThread().interrupt();
+    }
+    //connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/DEFIB/Desktop/pti.sqlite");
+    connection = DriverManager.getConnection("jdbc:sqlite://home/pti/pti.sqlite");
+    //connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/david/Desktop/pti.sqlite");
+    Statement statement = connection.createStatement();
+        
+    %>
 
 
 
